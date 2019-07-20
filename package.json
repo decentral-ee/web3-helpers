@@ -1,0 +1,33 @@
+{
+    "name": "@decentral.ee/web3-test-helpers",
+    "version": "0.1.0",
+    "description": "Testing helpers for web3 development.",
+    "main": "src/index.js",
+    "dependencies": {
+        "chai": "^4.2.0",
+        "openzeppelin-test-helpers": "^0.4.0"
+    },
+    "devDependencies": {
+        "truffle": "^5.0.27"
+    },
+    "scripts": {
+        "test": "truffle test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/decentral-ee/web3-test-helpers.git"
+    },
+    "keywords": [
+        "ethereum",
+        "web3",
+        "truffle",
+        "solidity",
+        "decentral.ee"
+    ],
+    "author": "Miao ZhiCheng <miao@decentral.ee>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/decentral-ee/web3-test-helpers/issues"
+    },
+    "homepage": "https://github.com/decentral-ee/web3-test-helpers#readme"
+}

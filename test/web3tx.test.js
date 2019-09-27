@@ -60,4 +60,10 @@ contract("web3tx", accounts => {
             }]
         })(10));
     });
+
+    it("encodeABI", async () => {
+        let tx;
+        const tester = await web3tx(Tester.new, "Tester.new")();
+        assert.equal(tester.contract.methods.setValue(2).encodeABI(), "0xfb693f770000000000000000000000000000000000000000000000000000000000000002");
+    });
 });

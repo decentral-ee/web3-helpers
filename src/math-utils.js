@@ -1,3 +1,5 @@
+/* global web3 */
+
 /**
  * Generic round function, see:
  *  - https://stackoverflow.com/a/18358056/1375656

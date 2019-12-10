@@ -1,4 +1,4 @@
-const { expectEvent } = require("openzeppelin-test-helpers");
+const { expectEvent } = require("@openzeppelin/test-helpers");
 
 module.exports = function web3tx(fn, msg, expects = {}) {
     return async function() {

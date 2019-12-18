@@ -24,8 +24,20 @@ function round(num, places = 2) {
  * @returns {Array<string>} array with the [<whole>, <decimal>] parts of the number
  */
 function splitDecimalNumber(num) {
+    let sign = "";
+    if (typeof(num) == "number") {
+        // to avoid scientific notion (e-) of Number.toString()
+        // > 0.00000001.toString()
+        // '1e-8'
+        num = num.toFixed(50);
+    }
+    if (num.startsWith("-")) {
+        sign = "-";
+        num = num.slice(1);
+    }
     const [whole = "", dec = ""] = num.toString().split(".");
     return [
+        sign,
         whole.replace(/^0*/, ""), // trim leading zeroes
         dec.replace(/0*$/, ""), // trim trailing zeroes
     ];
@@ -41,7 +53,7 @@ function splitDecimalNumber(num) {
  * @returns {string} formatted number
  */
 function fromDecimals(num, decimals, { truncate = true } = {}) {
-    const [whole, dec] = splitDecimalNumber(num);
+    const [sign, whole, dec] = splitDecimalNumber(num);
     if (!whole && !dec) {
         return "0";
     }
@@ -52,17 +64,17 @@ function fromDecimals(num, decimals, { truncate = true } = {}) {
     const decWithoutBase = paddedWhole.slice(decimalIndex);
 
     if (!truncate && dec) {
-    // We need to keep all the zeroes in this case
-        return `${wholeWithoutBase}.${decWithoutBase}${dec}`;
+        // We need to keep all the zeroes in this case
+        return `${sign}${wholeWithoutBase}.${decWithoutBase}${dec}`;
     }
 
     // Trim any trailing zeroes from the new decimals
     const decWithoutBaseTrimmed = decWithoutBase.replace(/0*$/, "");
     if (decWithoutBaseTrimmed) {
-        return `${wholeWithoutBase}.${decWithoutBaseTrimmed}`;
+        return `${sign}${wholeWithoutBase}.${decWithoutBaseTrimmed}`;
+    } else {
+        return sign + wholeWithoutBase;
     }
-
-    return wholeWithoutBase;
 }
 
 /**
@@ -75,7 +87,7 @@ function fromDecimals(num, decimals, { truncate = true } = {}) {
  * @returns {string} formatted number
  */
 function toDecimals(num, decimals, { truncate = true } = {}) {
-    const [whole, dec] = splitDecimalNumber(num);
+    const [sign, whole, dec] = splitDecimalNumber(num);
     if (!whole && !dec) {
         return "0";
     }
@@ -85,9 +97,10 @@ function toDecimals(num, decimals, { truncate = true } = {}) {
     const wholeWithBase = withoutDecimals.slice(0, wholeLengthWithBase);
 
     if (!truncate && wholeWithBase.length < withoutDecimals.length) {
-        return `${wholeWithBase}.${withoutDecimals.slice(wholeLengthWithBase)}`;
+        return `${sign}${wholeWithBase}.${withoutDecimals.slice(wholeLengthWithBase)}`;
+    } else {
+        return (sign + wholeWithBase).replace(/^0*/, "");
     }
-    return wholeWithBase;
 }
 
 /**

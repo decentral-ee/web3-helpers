@@ -21,6 +21,9 @@ module.exports = function web3tx(fn, msg, expects = {}) {
         tx = await web3.eth.getTransaction(transactionHash);
         r.receipt = receipt;
 
+        let block = await web3.eth.getBlock(tx.blockNumber);
+        r.timestamp = block.timestamp;
+
         let cost = web3.utils.toBN(receipt.gasUsed * tx.gasPrice);
         r.txCost = cost;
 

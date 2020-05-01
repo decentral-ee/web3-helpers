@@ -49,6 +49,7 @@ contract("web3tx", accounts => {
             }]
         })(10);
         assert.isDefined(tx.receipt);
+        assert.isDefined(tx.timestamp);
         assert.isTrue(tx.txCost > 100000);
         await assertFailure(web3tx(tester.setValue, "tester.setValue 10 expecting 11", {
             inLogs: [{

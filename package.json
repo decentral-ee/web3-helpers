@@ -1,15 +1,15 @@
 {
     "name": "@decentral.ee/web3-test-helpers",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "description": "Testing helpers for web3 development.",
     "main": "src/index.js",
     "peerDependencies": {
-        "@openzeppelin/test-helpers": "^0.5.4"
+        "@openzeppelin/test-helpers": "^0.5.5"
     },
     "devDependencies": {
-        "@openzeppelin/test-helpers": "^0.5.4",
+        "@openzeppelin/test-helpers": "^0.5.5",
         "chai": "^4.2.0",
-        "truffle": "^5.1.9"
+        "truffle": "^5.1.24"
     },
     "scripts": {
         "test": "truffle test"

@@ -31,6 +31,6 @@ jobs:
       run: |
         npm ci
         npm run test
-        echo $NODE_AUTH_TOKEN ${{secrets.npm_token}} | wc -c
+        echo -n "$NODE_AUTH_TOKEN" | wc -c
       env:
-        NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

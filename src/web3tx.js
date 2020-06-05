@@ -21,6 +21,13 @@ module.exports = function web3tx(fn, msg, expects = {}) {
         tx = await web3.eth.getTransaction(transactionHash);
         r.receipt = receipt;
 
+        // some ganache return gasUsed in hex string
+        if (typeof(receipt.gasUsed) == "string"
+            && receipt.gasUsed.startsWith("0x")) {
+            receipt.gasUsed = parseInt(receipt.gasUsed, 16);
+        }
+
+        // calculate gas cost
         let cost = web3.utils.toBN(receipt.gasUsed * tx.gasPrice);
         r.txCost = cost;
 

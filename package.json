@@ -1,6 +1,6 @@
 {
     "name": "@decentral.ee/web3-test-helpers",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "description": "Testing helpers for web3 development.",
     "main": "src/index.js",
     "peerDependencies": {

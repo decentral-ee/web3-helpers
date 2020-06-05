@@ -1,8 +1,8 @@
-name: Node.js Package
+name: Bump version
 
 on:
   release:
-    types: [published]
+    types: [created]
 
 jobs:
   publish-npm:
@@ -16,9 +16,9 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
 
-      - name: npm build and publish
+      - name: Bump patch version
         run: |
-          npm ci
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          git checkout master
+          git version patch
+          git commit -m "Automatically bump patch version on github release created" .
+          git push

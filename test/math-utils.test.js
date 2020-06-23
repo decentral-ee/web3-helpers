@@ -77,7 +77,7 @@ describe("math-utils", () => {
         assert.equal(toWad("-1234567901.23457").toString(), "-1234567901234570000000000000");
     })
 
-    it("to/from BN", () => {
+    it("toBN", () => {
         assert.equal(toBN(2).toString(), "2");
     })
 

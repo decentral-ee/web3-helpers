@@ -123,11 +123,15 @@ function toWad(n) {
     return web3.utils.toBN(toDecimals(n, 18));
 }
 
+function toBN() {
+    return web3.utils.toBN.apply(null, arguments);
+}
+
 module.exports = {
     round,
     fromDecimals,
     toDecimals,
     wad4human,
     toWad,
-    toBN: web3.utils.toBN
+    toBN,
 };

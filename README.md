@@ -1,4 +1,4 @@
-Testing helpers for web3 development.
+Helpers for web3 development.
 
 <p align="center">
     <a href="https://github.com/decentral-ee/web3-test-helpers/actions">

@@ -1,4 +1,11 @@
-const { round, fromDecimals, toDecimals, wad4human, toWad } = require("../src");
+const {
+    round,
+    fromDecimals,
+    toDecimals,
+    wad4human,
+    toWad,
+    toBN
+} = require("../src");
 
 describe("math-utils", () => {
     it("round", () => {
@@ -69,4 +76,9 @@ describe("math-utils", () => {
         assert.equal(toWad("1234567901.23457").toString(), "1234567901234570000000000000");
         assert.equal(toWad("-1234567901.23457").toString(), "-1234567901234570000000000000");
     })
+
+    it("to/from BN", () => {
+        assert.equal(toBN(2).toString(), "2");
+    })
+
 })

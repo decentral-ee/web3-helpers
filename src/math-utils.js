@@ -128,5 +128,6 @@ module.exports = {
     fromDecimals,
     toDecimals,
     wad4human,
-    toWad
+    toWad,
+    toBN: web3.utils.toBN
 };

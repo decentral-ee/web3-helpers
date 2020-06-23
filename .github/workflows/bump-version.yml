@@ -5,7 +5,7 @@ on:
     types: [created]
 
 jobs:
-  publish-npm:
+  bump-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -19,6 +19,8 @@ jobs:
       - name: Bump patch version
         run: |
           git checkout master
-          git version patch
+          npm version patch
+          git config --global user.email "miao@decentral.ee"
+          git config --global user.name "Miao ZhiCheng"
           git commit -m "Automatically bump patch version on github release created" .
           git push

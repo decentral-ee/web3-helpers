@@ -4,12 +4,12 @@
     "description": "Helpers for web3 development.",
     "main": "src/index.js",
     "peerDependencies": {
-        "@openzeppelin/test-helpers": "^0.5.6"
+        "@openzeppelin/test-helpers": "^0.5.9"
     },
     "devDependencies": {
-        "@openzeppelin/test-helpers": "^0.5.6",
+        "@openzeppelin/test-helpers": "^0.5.9",
         "chai": "^4.2.0",
-        "truffle": "^5.1.31"
+        "truffle": "^5.1.51"
     },
     "scripts": {
         "test": "truffle test"

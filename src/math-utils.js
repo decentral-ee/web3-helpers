@@ -1,4 +1,4 @@
-/* global web3 */
+const { web3 } = require("@openzeppelin/test-helpers/src/setup");
 
 /**
  * Generic round function, see:

@@ -1,5 +1,7 @@
 const { expectEvent } = require("@openzeppelin/test-helpers");
 
+const { web3 } = require("@openzeppelin/test-helpers/src/setup");
+
 module.exports = function web3tx(fn, msg, expects = {}) {
     return async function() {
         console.log(msg + ": started");

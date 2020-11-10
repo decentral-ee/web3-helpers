@@ -20,18 +20,28 @@ module.exports = function web3tx(fn, msg, expects = {}) {
             receipt = await web3.eth.getTransactionReceipt(transactionHash);
         }
 
-        tx = await web3.eth.getTransaction(transactionHash);
-        r.receipt = receipt;
+        let gasUsed;
+        if (receipt) {
+            r.receipt = receipt;
 
-        // some ganache return gasUsed in hex string
-        if (typeof(receipt.gasUsed) == "string"
-            && receipt.gasUsed.startsWith("0x")) {
-            receipt.gasUsed = parseInt(receipt.gasUsed, 16);
+            // some ganache return gasUsed in hex string
+            if (typeof(receipt.gasUsed) == "string" &&
+                receipt.gasUsed.startsWith("0x")) {
+                receipt.gasUsed = parseInt(receipt.gasUsed, 16);
+            }
+            gasUsed = receipt.gasUsed;
         }
 
-        // calculate gas cost
-        let cost = web3.utils.toBN(receipt.gasUsed * tx.gasPrice);
-        r.txCost = cost;
+
+        let gasPriceGwei;
+        if (transactionHash)  {
+            tx = await web3.eth.getTransaction(transactionHash);
+            // calculate gas cost
+            let cost = web3.utils.toBN(receipt.gasUsed * tx.gasPrice);
+            r.txCost = cost;
+            r.gasPrice = tx.gasPrice;
+            gasPriceGwei = web3.utils.fromWei(r.gasPrice, "gwei");
+        }
 
         // check logs
         if (expects.inConstruction) {
@@ -45,8 +55,9 @@ module.exports = function web3tx(fn, msg, expects = {}) {
             });
         }
 
-        let gasPrice = web3.utils.fromWei(tx.gasPrice, "gwei");
-        console.log(`${msg}: done, gas used ${receipt.gasUsed}, gas price ${gasPrice} Gwei`);
+
+        console.log(`${msg}: done, gas used ${gasUsed}, gas price ${gasPriceGwei} Gwei`);
+
         return r;
     };
 };

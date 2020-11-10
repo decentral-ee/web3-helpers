@@ -1,6 +1,6 @@
 {
     "name": "@decentral.ee/web3-helpers",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "description": "Helpers for web3 development.",
     "main": "src/index.js",
     "peerDependencies": {

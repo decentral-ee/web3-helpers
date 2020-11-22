@@ -1,8 +1,10 @@
 const { expectEvent } = require("@openzeppelin/test-helpers");
 
-const { web3 } = require("@openzeppelin/test-helpers/src/setup");
+const web3backup = require("@openzeppelin/test-helpers/src/setup").web3;
 
 module.exports = function web3tx(fn, msg, expects = {}) {
+    const web3 = global.web3 || web3backup;
+
     return async function() {
         console.log(msg + ": started");
         let r = await fn.apply(null, arguments);

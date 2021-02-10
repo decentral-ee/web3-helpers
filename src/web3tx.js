@@ -36,13 +36,15 @@ module.exports = function web3tx(fn, msg, expects = {}) {
 
 
         let gasPriceGwei;
-        if (transactionHash)  {
+        if (transactionHash && receipt)  {
             tx = await web3.eth.getTransaction(transactionHash);
-            // calculate gas cost
-            let cost = web3.utils.toBN(receipt.gasUsed * tx.gasPrice);
-            r.txCost = cost;
-            r.gasPrice = tx.gasPrice;
-            gasPriceGwei = web3.utils.fromWei(r.gasPrice, "gwei");
+            if (tx) {
+                // calculate gas cost
+                let cost = web3.utils.toBN(receipt.gasUsed * tx.gasPrice);
+                r.txCost = cost;
+                r.gasPrice = tx.gasPrice;
+                gasPriceGwei = web3.utils.fromWei(r.gasPrice, "gwei");
+            }
         }
 
         // check logs

@@ -5,7 +5,7 @@ const {
     wad4human,
     toWad,
     toBN
-} = require("../src");
+} = require("..");
 
 describe("math-utils", () => {
     it("round", () => {
@@ -20,7 +20,7 @@ describe("math-utils", () => {
         assert.equal(round("2.325555", 3), 2.326);
         assert.equal(round("-2.322222"), -2.32);
         assert.equal(round("-2.325555"), -2.33);
-    })
+    });
 
     it("fromDecimals", () => {
         assert.equal(fromDecimals("1234567", 3), "1234.567");
@@ -40,7 +40,7 @@ describe("math-utils", () => {
         assert.equal(fromDecimals("-0.2", 3, { truncate: false } ), "-0.0002");
         assert.equal(fromDecimals("0.2", 3), "0");
         assert.equal(fromDecimals("-0.2", 3), "-0");
-    })
+    });
 
     it("toDecimals", () => {
         // not a good idea to use number type, but it's supported
@@ -57,7 +57,7 @@ describe("math-utils", () => {
         assert.equal(toDecimals("-1234.56", 3), "-1234560");
         assert.equal(toDecimals("-1234.5602", 3), "-1234560");
         assert.equal(toDecimals("-1234.5602", 3, { truncate: false }), "-1234560.2");
-    })
+    });
 
     it("wad4human", () => {
         assert.equal(wad4human("1234567901234567890123456789"), "1234567901.23457");
@@ -70,15 +70,15 @@ describe("math-utils", () => {
         assert.equal(wad4human("-1234567901230000000000000000", 3), "-1234567901.230");
         // unsupported case
         // assert.equal(wad4human("12345679012345678901234567891234567901234567890123456789", 3), "12345679012345678901234567891234567901.235");
-    })
+    });
 
     it("toWad", () => {
         assert.equal(toWad("1234567901.23457").toString(), "1234567901234570000000000000");
         assert.equal(toWad("-1234567901.23457").toString(), "-1234567901234570000000000000");
-    })
+    });
 
     it("toBN", () => {
         assert.equal(toBN(2).toString(), "2");
-    })
+    });
 
-})
+});

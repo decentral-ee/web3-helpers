@@ -1,5 +1,6 @@
 module.exports = {
     "globals": {
+        "describe": true,
         "artifacts": true,
         "contract": true,
         "before": true,

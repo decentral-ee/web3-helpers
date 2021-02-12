@@ -1,4 +1,4 @@
-const { web3tx } = require("../src");
+const { web3tx } = require("..");
 const { expect } = require("chai");
 const Tester = artifacts.require("Tester");
 
@@ -62,7 +62,6 @@ contract("web3tx", accounts => {
     });
 
     it("encodeABI", async () => {
-        let tx;
         const tester = await web3tx(Tester.new, "Tester.new")();
         assert.equal(tester.contract.methods.setValue(2).encodeABI(), "0xfb693f770000000000000000000000000000000000000000000000000000000000000002");
     });

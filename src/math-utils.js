@@ -1,4 +1,4 @@
-const { web3 } = require("@openzeppelin/test-helpers/src/setup");
+const Web3Utils = require("web3-utils");
 
 /**
  * Generic round function, see:
@@ -120,11 +120,11 @@ function wad4human(wad, decimals = 5) {
  * @returns {object} wad, 18 decimals BN
  */
 function toWad(n) {
-    return web3.utils.toBN(toDecimals(n, 18));
+    return Web3Utils.toBN(toDecimals(n, 18));
 }
 
 function toBN() {
-    return web3.utils.toBN.apply(null, arguments);
+    return Web3Utils.toBN.apply(null, arguments);
 }
 
 module.exports = {
@@ -134,4 +134,5 @@ module.exports = {
     wad4human,
     toWad,
     toBN,
+    BN: Web3Utils.BN,
 };

@@ -12,53 +12,21 @@ async function assertFailure (promise) {
 }
 
 contract("web3tx", accounts => {
-    it("inConstruction", async () => {
+    it("new and setValue", async () => {
         const tester1 = await web3tx(Tester.new, "Tester.new 1")();
-        assert.isDefined(tester1.address);
+        console.debug("receipt", tester1.receipt);
+        console.debug("address", tester1.address);
+        console.debug("txCost", tester1.txCost);
+        console.debug("gasPrice", tester1.gasPrice);
         assert.isDefined(tester1.receipt);
+        assert.isDefined(tester1.address);
         assert.isTrue(tester1.txCost > 100000);
-        const tester2 = await web3tx(Tester.new, "Tester.new 2", {
-            inConstruction: [{
-                name: "TesterCreated",
-                args: {
-                    setter: accounts[0]
-                }
-            }]
-        })();
-        assert.notEqual(tester1.address, tester2.address);
-        await assertFailure(web3tx(Tester.new, "Tester.new 3", {
-            inConstruction: [{
-                name: "TesterCreated",
-                args: {
-                    setter: accounts[1]
-                }
-            }]
-        })());
-    });
-
-    it("inLogs", async () => {
-        let tx;
-        const tester = await web3tx(Tester.new, "Tester.new")();
-        tx = await web3tx(tester.setValue, "tester.setValue 10", {
-            inLogs: [{
-                name: "ValueSet",
-                args: {
-                    setter: accounts[0],
-                    value: web3.utils.toBN(10)
-                }
-            }]
-        })(10);
+        const tx = await web3tx(tester1.setValue, "tester.setValue 10")(10);
+        console.debug(tx);
         assert.isDefined(tx.receipt);
+        assert.isDefined(tx.tx);
+        assert.isDefined(tx.gasPrice);
         assert.isTrue(tx.txCost > 100000);
-        await assertFailure(web3tx(tester.setValue, "tester.setValue 10 expecting 11", {
-            inLogs: [{
-                name: "ValueSet",
-                args: {
-                    setter: accounts[0],
-                    value: web3.utils.toBN(11)
-                }
-            }]
-        })(10));
     });
 
     it("encodeABI", async () => {

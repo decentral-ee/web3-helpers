@@ -1,9 +1,10 @@
-const { expectEvent } = require("@openzeppelin/test-helpers");
-
-const web3backup = require("@openzeppelin/test-helpers/src/setup").web3;
-
-module.exports = function web3tx(fn, msg, expects = {}) {
+module.exports = function web3tx(fn, msg) {
     const web3 = global.web3 || web3backup;
+
+    // use the backup web3
+    if (!web3) {
+        global.web3 = web3 = require("@openzeppelin/test-helpers/src/setup").web3;
+    }
 
     return async function() {
         console.log(msg + ": started");
@@ -46,19 +47,6 @@ module.exports = function web3tx(fn, msg, expects = {}) {
                 gasPriceGwei = web3.utils.fromWei(r.gasPrice, "gwei");
             }
         }
-
-        // check logs
-        if (expects.inConstruction) {
-            await Promise.all(expects.inConstruction.map(async i => {
-                await expectEvent.inConstruction(r, i.name, i.args);
-            }));
-        }
-        if (expects.inLogs) {
-            expects.inLogs.forEach(i => {
-                expectEvent.inLogs(receipt.logs, i.name, i.args);
-            });
-        }
-
 
         console.log(`${msg}: done, gas used ${gasUsed}, gas price ${gasPriceGwei} Gwei`);
 

@@ -1,4 +1,4 @@
-const { getWeb3, setWeb3Provider } = require("..");
+const { getWeb3, setWeb3Provider } = require("../src/config");
 
 describe("config", () => {
     it("setWeb3Provider/getWeb3", () => {

@@ -33,4 +33,10 @@ contract("web3tx", accounts => {
         const tester = await web3tx(Tester.new, "Tester.new")();
         assert.equal(tester.contract.methods.setValue(2).encodeABI(), "0xfb693f770000000000000000000000000000000000000000000000000000000000000002");
     });
+
+    it("disable global web3", async () => {
+        delete global.web3;
+        const tester = await web3tx(Tester.new, "Tester.new")();
+        assert.equal(tester.contract.methods.setValue(2).encodeABI(), "0xfb693f770000000000000000000000000000000000000000000000000000000000000002");
+    });
 });

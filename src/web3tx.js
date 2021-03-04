@@ -1,9 +1,9 @@
 module.exports = function web3tx(fn, msg) {
-    const web3 = global.web3 || web3backup;
+    let web3 = global.web3;
 
-    // use the backup web3
+    // use the default openzeppelin test-helpers web3
     if (!web3) {
-        global.web3 = web3 = require("@openzeppelin/test-helpers/src/setup").web3;
+        web3 = require("./config").getWeb3();
     }
 
     return async function() {
